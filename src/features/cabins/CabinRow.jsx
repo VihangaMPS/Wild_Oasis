@@ -51,10 +51,10 @@ function CabinRow({cabin}) {
 
     const {isLoading:isDeleting, mutate} = useMutation({ // when we want to delete
         mutationFn: deleteCabins,
-        onSuccess: () => { //after deleting a data row, with this function automatically reload
+        onSuccess: () => {
             toast.success('Cabin successfully deleted!');
 
-            queryClient.invalidateQueries({
+            queryClient.invalidateQueries({ //after deleting a data row, with this function automatically re-fetched data
                 queryKey: ['cabins']
             });
         },

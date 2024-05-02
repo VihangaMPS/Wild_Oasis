@@ -2,7 +2,8 @@ import supabase from "./supabase.js";
 
 export async function getCabins() {
 
-    const { data, error } = await supabase.from('cabins').select('*');
+    const { data, error } = await supabase
+        .from('cabins').select('*');
 
     if (error) {
         console.log(error);
@@ -12,12 +13,24 @@ export async function getCabins() {
     return data;
 }
 
+export async function createCabin(newCabin) {
+
+    const { data, error } = await supabase
+        .from('cabins').insert([newCabin]).select();
+
+    if (error) {
+        console.log(error);
+        throw new Error('Cabins could not be created!');
+    };
+
+    return data;
+
+}
+
 export async function deleteCabins(id) {
 
     const { data, error } = await supabase
-        .from('cabins')
-        .delete()
-        .eq('id', id);
+        .from('cabins').delete().eq('id', id);
 
     if (error) {
         console.log(error);
