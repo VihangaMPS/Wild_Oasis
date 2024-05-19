@@ -6,3 +6,14 @@ Currently, two official plugins are available:
 
 - [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+
+Libraries that used to build this Wild Oasis project
+    
+    To create this project used Vite - npm i vite
+    To Routing used React Router - npm i react-router-dom
+    For icons used React Icons - npm i react-icons
+    To Style React Elements used Styled Components - npm i styled-components
+    For Notifications used Toasts - npm i react-hot-toasts
+    To manage State Management used React Query - npm i @tanstack/react-query 
+    To work with Dates & Currency - npm i date-fns
+    To Manage Forms - npm i react-hook-form
