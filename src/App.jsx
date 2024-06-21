@@ -45,7 +45,7 @@ function App() {
                     <Route path="*" element={<PageNotFound/>}/>
                 </Routes>
             </BrowserRouter>
-            <Toaster position="top-center" gutter={12} containerStyle={{margin: "8px"}} toastOptions={{
+            <Toaster position="top-center" gutter={12} containerStyle={{margin: "8px"}} toastOptions={ {
                 success: {
                     duration: 3000,
                 },
@@ -56,6 +56,7 @@ function App() {
                     fontSize: '16px',
                     maxWidth: '500px',
                     padding: '16px 24px',
+                    border: '1px solid var(--color-grey-400)',
                     backgroundColor: 'var(--color-grey-0)',
                     color: 'var(--color-grey-700)'
                 }

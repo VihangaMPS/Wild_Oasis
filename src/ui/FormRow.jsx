@@ -26,9 +26,7 @@ const StyledFormRow = styled.div`
   }
 
   /* Special treatment if the row contains buttons, and if it's NOT a vertical row */
-  ${(props) =>
-    props.orientation !== "vertical" &&
-    css`
+  ${(props) => props.orientation !== "vertical" && css`
       &:has(button) {
         display: flex;
         justify-content: flex-end;

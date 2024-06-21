@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import {formatCurrency} from "../../utils/helpers.js";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
-import {deleteCabins} from "../../services/apiCabins.js";
+import {deleteCabin} from "../../services/apiCabins.js";
 import toast from "react-hot-toast";
 import {useState} from "react";
 import CreateCabinForm from "./CreateCabinForm.jsx";
@@ -49,10 +49,10 @@ const Discount = styled.div`
 function CabinRow({cabin}) {
     const {id: cabinId, name, maxCapacity, regularPrice, discount, image} = cabin;
 
-    const queryClient = useQueryClient();
+    const queryClient = useQueryClient(); // using queryClientHook, we can invalidate data(re-fetching data) to refresh page
 
     const {isLoading: isDeleting, mutate} = useMutation({ // when we want to delete
-        mutationFn: deleteCabins,
+        mutationFn: (id) =>  deleteCabin(id),
         onSuccess: () => { //after deleting a data row, with this function automatically reload
             toast.success('Cabin successfully deleted!');
 
