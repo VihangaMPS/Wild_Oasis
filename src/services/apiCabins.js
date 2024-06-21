@@ -5,7 +5,7 @@ export async function getCabins() {
     const { data, error } = await supabase.from('cabins').select('*');
 
     if (error) {
-        console.log(error);
+        console.error(error);
         throw new Error('Cabins could not be loaded!');
     }
 
@@ -14,10 +14,7 @@ export async function getCabins() {
 
 export async function deleteCabins(id) {
 
-    const { data, error } = await supabase
-        .from('cabins')
-        .delete()
-        .eq('id', id);
+    const { data, error } = await supabase.from('cabins').delete().eq('id', id);
 
     if (error) {
         console.log(error);

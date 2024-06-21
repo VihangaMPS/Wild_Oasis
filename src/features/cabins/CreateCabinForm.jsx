@@ -10,20 +10,25 @@ import toast from "react-hot-toast";
 import FormRow from "../../ui/FormRow.jsx";
 
 
-function CreateCabinForm({cabinToEdit, closeModal}) {
+function CreateCabinForm({cabinToEdit = {}}) {
 
+    const {id: editId, ...editValues} = cabinToEdit;
+    const isEditSession = Boolean(editId); // converting editId to, boolean to check
     const {
         register,
         handleSubmit,
         reset,
         getValues,
-        formState} = useForm();
+        formState
+    } = useForm({
+        defaultValues: isEditSession ? editValues : {},
+    });
 
     const {errors} = formState; // getting errors when form submission
 
     const queryClient = useQueryClient();
 
-    const {mutate, isLoading:isCreating} = useMutation({
+    const {mutate, isLoading: isCreating} = useMutation({
         mutationFn: createCabin,
         onSuccess: () => {
             toast.success("New Cabin Successfully Created!");
@@ -38,6 +43,7 @@ function CreateCabinForm({cabinToEdit, closeModal}) {
     function onSubmitFormData(data) {
         mutate({...data, image: data.image[0]});
     }
+
     function onErrorFormData(errors) {
         //console.log(errors)
     }
@@ -70,7 +76,7 @@ function CreateCabinForm({cabinToEdit, closeModal}) {
                             value: 1,
                             message: "Capacity should be at least 1"
                         }
-                    } )}/>
+                    })}/>
             </FormRow>
 
             <FormRow label="Discount" error={errors?.discount?.message}>
@@ -95,7 +101,7 @@ function CreateCabinForm({cabinToEdit, closeModal}) {
             <FormRow>
                 {/* type is an HTML attribute! */}
                 <Button variation="secondary" type="reset">Cancel</Button>
-                <Button disabled={isCreating}>Add cabin</Button>
+                <Button disabled={isCreating}>{isEditSession ? 'Edit Cabin' : 'Create new cabin'}</Button>
             </FormRow>
         </Form>
     );

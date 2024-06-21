@@ -9,8 +9,7 @@ const NavList = styled.ul`
 `;
 
 const StyledNavLink = styled(NavLink)`
-  &:link,
-  &:visited {
+  &:link, &:visited {
     display: flex;
     align-items: center;
     gap: 1.2rem;
@@ -23,10 +22,7 @@ const StyledNavLink = styled(NavLink)`
   }
 
   /* This works because react-router places the active class on the active NavLink */
-  &:hover,
-  &:active,
-  &.active:link,
-  &.active:visited {
+  &:hover, &:active, &.active:link, &.active:visited {
     color: var(--color-grey-800);
     background-color: var(--color-grey-50);
     border-radius: var(--border-radius-sm);
@@ -39,10 +35,7 @@ const StyledNavLink = styled(NavLink)`
     transition: all 0.3s;
   }
 
-  &:hover svg,
-  &:active svg,
-  &.active:link svg,
-  &.active:visited svg {
+  &:hover svg, &:active svg, &.active:link svg, &.active:visited svg {
     color: var(--color-brand-600);
   }
 `;
