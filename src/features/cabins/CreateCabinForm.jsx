@@ -4,15 +4,12 @@ import Button from "../../ui/Button";
 import FileInput from "../../ui/FileInput";
 import {Textarea} from "../../ui/Textarea.jsx";
 import {useForm} from "react-hook-form";
-import {useMutation, useQueryClient} from "@tanstack/react-query";
-import {createEditCabin} from "../../services/apiCabins.js";
-import toast from "react-hot-toast";
 import FormRow from "../../ui/FormRow.jsx";
 import {useCreateCabin} from "./useCreateCabin.js";
 import {useEditCabin} from "./useEditCabin.js";
 
 
-function CreateCabinForm({cabinToEdit = {}}) {
+function CreateCabinForm({cabinToEdit = {}, onCloseModal}) {
 
     const {id: editId, ...editValues} = cabinToEdit;
     const isEditSession = Boolean(editId); // converting editId to, boolean to check
@@ -21,9 +18,9 @@ function CreateCabinForm({cabinToEdit = {}}) {
         defaultValues: isEditSession ? editValues : {},
     });
 
-    const {isCreating, createCabin} = useCreateCabin(reset);
+    const {isCreating, createCabin} = useCreateCabin(reset, onCloseModal);
 
-    const {isEditing, editCabin} = useEditCabin(reset);
+    const {isEditing, editCabin} = useEditCabin(reset, onCloseModal);
 
     const isWorking = isCreating || isEditing;
 
@@ -46,7 +43,7 @@ function CreateCabinForm({cabinToEdit = {}}) {
 
 // ----------------------------------------------------------------------------------------
     return (
-        <Form onSubmit={handleSubmit(onSubmitFormData, onErrorFormData)}>
+        <Form onSubmit={handleSubmit(onSubmitFormData, onErrorFormData)} type={onCloseModal ? 'modal' : 'regular'}>
 
             <FormRow label="Cabin name" error={errors?.name?.message}>
                 <Input type="text" id="name" disabled={isWorking}
@@ -97,7 +94,7 @@ function CreateCabinForm({cabinToEdit = {}}) {
 
             <FormRow>
                 {/* type is an HTML attribute! */}
-                <Button variation="secondary" type="reset">Cancel</Button>
+                <Button variation="secondary" type="reset" onClick={() => onCloseModal()}>Cancel</Button>
                 <Button disabled={isWorking}>{isEditSession ? 'Edit Cabin' : 'Create new cabin'}</Button>
             </FormRow>
         </Form>
