@@ -3,6 +3,7 @@ import Spinner from "../../ui/Spinner";
 import CabinRow from "./CabinRow.jsx";
 import {useCabins} from "./useCabins.js";
 import Table from "../../ui/Table.jsx";
+import Menus from "../../ui/Menus.jsx";
 
 const TableHeader = styled.header`
     display: grid;
@@ -19,24 +20,28 @@ const TableHeader = styled.header`
     padding: 1.6rem 2.4rem;
 `;
 
-function  CabinTable() {
+function CabinTable() {
 
     const {isLoading, cabins} = useCabins();
 
     if (isLoading) return <Spinner/>;
 
     return (
-        <Table columns="0.6fr 1.8fr 2.2fr 1fr 1fr 1fr">
-            <Table.Header>
-                <div></div>
-                <div>Cabin</div>
-                <div>Capacity</div>
-                <div>Price</div>
-                <div>Discount</div>
-                <div></div>
-            </Table.Header>
-            {cabins.map(cabin => (<CabinRow cabin={cabin} key={cabin.id}/>))}
-        </Table>
+        <Menus>
+            <Table columns="0.6fr 1.8fr 2.2fr 1fr 1fr 1fr">
+                <Table.Header>
+                    <div></div>
+                    <div>Cabin</div>
+                    <div>Capacity</div>
+                    <div>Price</div>
+                    <div>Discount</div>
+                    <div></div>
+                </Table.Header>
+
+                {/*Applying Render Prop Pattern*/}
+                <Table.Body data={cabins} render={cabin => (<CabinRow cabin={cabin} key={cabin.id}/>)}/>
+            </Table>
+        </Menus>
     );
 }
 
