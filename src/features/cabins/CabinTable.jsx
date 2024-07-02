@@ -4,6 +4,7 @@ import {useCabins} from "./useCabins.js";
 import Table from "../../ui/Table.jsx";
 import Menus from "../../ui/Menus.jsx";
 import {useSearchParams} from "react-router-dom";
+import {fi} from "date-fns/locale";
 
 function CabinTable() {
     const {isLoading, cabins} = useCabins();
@@ -11,13 +12,20 @@ function CabinTable() {
 
     if (isLoading) return <Spinner/>;
 
-    const filterValue = searchParams.get("discount") || "all"; /* default All set */
+    // 1) Filter
+    const filterValue = searchParams.get("discount") || "all"; /* default set All to Show all data in Table */
 
     let filteredCabins;
     if (filterValue === "all") filteredCabins = cabins;
     if (filterValue === "no-discount") filteredCabins = cabins.filter((cabin) => cabin.discount === 0);
     if (filterValue === "with-discount") filteredCabins = cabins.filter((cabin) => cabin.discount > 0);
 
+
+    // 2) Sort
+    const sortBy = searchParams.get('sortBy') || 'startDate-asc';
+    const [field, direction] = sortBy.split('-');
+    const modifier = direction === 'asc' ? 1 : -1; // use it to convert positive num to negative num & negative num to positive num
+    const sortedCabins = filteredCabins.sort((a, b) => (a[field] - b[field]) * modifier) ; // -> sorting asc
 
     return (
         <Menus>
@@ -32,7 +40,7 @@ function CabinTable() {
                 </Table.Header>
 
                 {/*Applying Render Prop Pattern*/}
-                <Table.Body data={filteredCabins} render={cabin => (<CabinRow cabin={cabin} key={cabin.id}/>)}/>
+                <Table.Body data={sortedCabins} render={cabin => (<CabinRow cabin={cabin} key={cabin.id}/>)}/>
             </Table>
         </Menus>
     );
