@@ -7,7 +7,7 @@ import TodayActivity from 'features/check-in-out/TodayActivity';
 import { useRecentBookings } from 'features/dashboard/useRecentBookings';
 import Spinner from 'ui/Spinner';
 import { useRecentStays } from './useRecentStays';
-import { useCabins } from 'features/cabins/useCabins';
+import { useCabins } from 'features/cabins/useBookings';
 
 const StyledDashboardLayout = styled.div`
   display: grid;

@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import {createContext, useContext} from "react";
-import {da} from "date-fns/locale";
 
 const StyledTable = styled.div`
     border: 1px solid var(--color-grey-200);
