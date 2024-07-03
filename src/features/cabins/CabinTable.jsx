@@ -9,7 +9,8 @@ import Empty from "../../ui/Empty.jsx";
 function CabinTable() {
     const {isLoading, cabins} = useCabins();
     const [searchParams] = useSearchParams();
-    if (!cabins.length) return <Empty resource="Cabins"/>
+
+    if (!cabins) return <Empty resource="Cabins"/>
 
     if (isLoading) return <Spinner/>;
 
