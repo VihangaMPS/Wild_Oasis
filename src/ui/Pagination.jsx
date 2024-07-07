@@ -26,8 +26,7 @@ const Buttons = styled.div`
 `;
 
 const PaginationButton = styled.button`
-  background-color: ${(props) =>
-    props.active ? " var(--color-brand-600)" : "var(--color-grey-50)"};
+  background-color: ${(props) => props.active ? " var(--color-brand-600)" : "var(--color-grey-50)"};
   color: ${(props) => (props.active ? " var(--color-brand-50)" : "inherit")};
   border: none;
   border-radius: var(--border-radius-sm);
@@ -74,6 +73,7 @@ function Pagination({count}) {
         searchParams.set("page", next);
         setSearchParams(searchParams);
     }
+
     function previousPage() {
         const prev = currentPage === 1 ? currentPage : currentPage - 1;
 
