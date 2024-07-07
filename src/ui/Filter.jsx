@@ -40,6 +40,9 @@ function Filter({filterField, options}) {
 
   function handleClick(value) {
     searchParams.set(filterField, value); // Setting the values to the URL
+
+    if (searchParams.get('page')) searchParams.set('page', 1);
+
     setSearchParams(searchParams)
   }
 

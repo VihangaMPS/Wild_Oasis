@@ -27,7 +27,7 @@ function CheckinBooking() {
     const [addBreakfast, setAddBreakfast] = useState(false);
 
     const {booking, isLoading} = useBooking();
-    const {mutate: checkin, isLoading: isCheckingIn} = useCheckin();
+    const {checkin, isLoading: isCheckingIn} = useCheckin();
     const moveBack = useMoveBack();
     const {isLoading: isLoadingSettings, settings} = useSettings();
 
@@ -43,7 +43,7 @@ function CheckinBooking() {
     function handleCheckin() {
         if (!confirmPaid) return;
 
-        if (addBreakfast)
+        if (addBreakfast) {
             checkin({
                 bookingId,
                 breakfast: {
@@ -52,7 +52,7 @@ function CheckinBooking() {
                     totalPrice: totalPrice + optionalBreakfastPrice,
                 },
             });
-        else {
+        } else {
             checkin({bookingId, breakfast: {}});
         }
     }
@@ -67,7 +67,6 @@ function CheckinBooking() {
 
             <BookingDataBox booking={booking}/>
 
-            {/* LATER */}
             {!hasBreakfast && (
                 <Box>
                     <Checkbox
@@ -92,13 +91,8 @@ function CheckinBooking() {
                     id='confirm'
                 >
                     I confirm that {guests.fullName} has paid the total amount of{' '}
-                    {!addBreakfast
-                        ? formatCurrency(totalPrice)
-                        : `${formatCurrency(
-                            totalPrice + optionalBreakfastPrice
-                        )} (${formatCurrency(totalPrice)} + ${formatCurrency(
-                            optionalBreakfastPrice
-                        )} for breakfast)`}
+                    {!addBreakfast ? formatCurrency(totalPrice) : `${formatCurrency(totalPrice + optionalBreakfastPrice)} 
+                        (${formatCurrency(totalPrice)} + ${formatCurrency(optionalBreakfastPrice)} for breakfast)`}
                 </Checkbox>
             </Box>
 
