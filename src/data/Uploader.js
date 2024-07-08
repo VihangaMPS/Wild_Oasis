@@ -4,7 +4,6 @@ import { subtractDates } from '../utils/helpers';
 import { bookings } from './data-bookings';
 import { cabins } from './data-cabins';
 import { guests } from './data-guests';
-import UploaderData from "./UploaderData.jsx";
 
 async function deleteGuests() {
   const { error } = await supabase.from('guests').delete().gt('id', 0);
