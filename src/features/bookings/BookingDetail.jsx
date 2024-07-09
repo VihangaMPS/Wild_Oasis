@@ -15,7 +15,7 @@ import {useMoveBack} from "../../hooks/useMoveBack.js";
 import {useBooking} from "./useBooking.js";
 import {useDeleteBooking} from "./useDeleteBooking.js";
 import {useCheckout} from "../check-in-out/useCheckout.js";
-import {HiArrowUpOnSquare} from "react-icons/all.js";
+import {HiArrowUpOnSquare} from "react-icons/hi2";
 
 const HeadingGroup = styled.div`
     display: flex;
