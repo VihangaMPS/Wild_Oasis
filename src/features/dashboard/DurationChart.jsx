@@ -1,12 +1,5 @@
 import { useDarkMode } from 'context/DarkModeContext';
-import {
-  Cell,
-  Legend,
-  Pie,
-  PieChart,
-  ResponsiveContainer,
-  Tooltip,
-} from 'recharts';
+import {Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip,} from 'recharts';
 import styled from 'styled-components';
 import { box } from 'styles/styles';
 import Heading from 'ui/Heading';
